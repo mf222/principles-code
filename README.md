@@ -51,5 +51,77 @@ La siguiente función almacena y retorna el estado del objeto.
 
 ```
 
+## Boy Scout Rule
+Al hacer cambios a código existente se tiende a degradar la calidad del mismo debido a la acumuluación de falencias técnicas.
+
+### Bad
+Del código anterior, al añadir más funcionalidades sobre el mismo mal código.
+
 ```python
+    def write_page(self, data):
+        self.pages[self.actual_page] = data
+        self.actual_page += 1
+        for number, page in self.pages.items():
+            self.pages[number] = page + "This was page {}".format(number)
+        return self.pages
+```
+
+### Solución: Boy Scout Rule
+Hacer refactory del código.
+```python
+    def write_page(self, data)
+    def get_pages(self)
+    def add_number_page(self)
+```
+
+## KISS
+El evitar la complejidad y buscar la simplicidad debe ser siempre una meta fija.
+
+### Bad
+Una sumatoria hasta `n` de forma recursiva. Lo que todos siempre hemos necesitado.
+```python
+def sum(n, first=0):
+    if n == first:
+        return 0
+    else:
+        return n + sum(n-1, (n+first)//2) + sum((n+first)//2, first)
+
+```
+
+### Solución: Keep it simple stupid!
+Simplemente hacemos el calculo de la sumatoria.
+```python
+def sum(n):
+    return n*(n+1)/2
+```
+
+## DRY
+Cada pieza dentro de un sistema debe tener una única e inequívoca representación dentro de un sistema.
+
+### Bad
+Código repetido
+```python
+    def increase(self, e):
+        for element in self.lista:
+            if e == element:
+                element += 1
+
+    def decrease(self, e):
+        for element in self.lista:
+            if e == element:
+                element -= 1
+
+    def duplicate(self, e):
+        for element in self.lista:
+            if e == element:
+                element *= 2
+```
+
+### Solución: DRY
+Crear métodos para encapsular las funcionalidades repetidas.
+```python
+    def find(self, e):
+        for element in self.lista:
+            if element == e:
+                return element
 ```
